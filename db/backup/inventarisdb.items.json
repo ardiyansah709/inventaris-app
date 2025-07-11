@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "6870a25b1243a32492891ad1"
+  },
+  "name": "Lenovo Yoga 9i 2-in-1 Aura Edition",
+  "category": "ElekTronik",
+  "stock": 15,
+  "price": 27000000,
+  "photo": "1752212059973.png",
+  "desc": "Lenovo Yoga 9i 2-in-1 Aura Edition cocok buat kamu yang mencari jenis laptop premium. Desainnya elegan, bodinya tipis, dan layarnya pakai panel OLED 14 inci dengan refresh rate 120 Hz. Spek ini bikin semua tampilan terlihat tajam dan smooth.\r\n\r\nDi bagian engsel, disematkan speaker dengan teknologi Dolby Atmos yang bikin suara terasa lebih lebar dan jernih. Urusan performa, laptop ini cukup cepat untuk tugas harian seperti kerja, multitasking ringan, dan hiburan. \r\n\r\nDaya tahan baterainya bisa sampai 13 jam, jadi aman buat seharian kerja di luar. Dengan kisaran mulai dari Rp27.000.000. Laptop ini sudah dilengkapi juga dengan fitur AI Copilot+ yang bikin kerja jadi lebih efisien dan produktif.",
+  "updated": {
+    "$date": "2025-07-11T06:08:53.307Z"
+  },
+  "createdAt": {
+    "$date": "2025-07-11T05:34:19.982Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T06:08:53.308Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6870a2de1243a32492891ad8"
+  },
+  "name": "Lenovo Yoga Slim 9i",
+  "category": "ElekTronik",
+  "stock": 15,
+  "price": 28000000,
+  "photo": "1752212190801.png",
+  "desc": "Untuk kamu yang menyukai desain laptop super slim dan ringan, tapi tetap bertenaga pilih Lenovo Yoga Slim 9i. Harganya berkisar mulai dari Rp28.000.000 ini dilengkapi prosesor Intel Core Ultra 7 dengan RAM hingga 16 GB.\r\n\r\nLaptop ini cocok banget buat profesional yang kerap kerja mobile. Desainnya elegan, bodinya solid, dan kesan premiumnya langsung terasa sejak pertama kali dipakai. Walau tak memiliki fitur 2-in-1 seperti seri Yoga lainnya.\r\n\r\nPerangkat ini tetap fleksibel berkat engsel yang bisa ditekuk hingga 180 derajat. Keyboard-nya pun nyaman untuk posisi mengetik lama, dan baterainya juga awet dipakai seharian. Kalau kamu butuh layar sentuh, mungkin harus cari opsi lain yang lebih sesuai kebutuhan.",
+  "updated": {
+    "$date": "2025-07-11T05:36:30.803Z"
+  },
+  "createdAt": {
+    "$date": "2025-07-11T05:36:30.804Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T05:36:30.804Z"
+  },
+  "__v": 0
+}]
