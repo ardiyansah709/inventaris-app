@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pengaturan Admin</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body.bg-grad { background: linear-gradient(120deg,#23243e 0%, #283655 100%);}
+    .form-container {
+      background: #23243cfa;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px #181e2b40;
+      max-width: 440px;
+      margin: 62px auto;
+      padding: 38px 32px 28px 32px;
+      color: #fff;
+    }
+    .form-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ff9f1c;
+      text-align: center;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+    .input-group {
+      margin-bottom: 18px;
+    }
+    .input-group label {
+      font-weight: 600;
+      color: #ffeacc;
+      margin-bottom: 5px;
+      display: block;
+      letter-spacing: .1px;
+    }
+    .input-group input {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #283655;
+      padding: 12px 13px;
+      font-size: 1.06rem;
+      background: #283655;
+      color: #fff;
+      transition: border 0.2s;
+    }
+    .input-group input:focus {
+      border-color: #ff9f1c;
+      outline: none;
+    }
+    .show-hide-pw {
+      float:right;
+      margin-right:8px;
+      margin-top: -32px;
+      cursor:pointer;
+      color: #ff9f1c;
+      font-size: 1.07em;
+      user-select: none;
+      transition: color .2s;
+    }
+    .show-hide-pw:hover { color: #43d8c9;}
+    .alert-ok {
+      background: #d7ffdf;
+      color: #217c36;
+      border-radius: 8px;
+      padding: 9px 13px;
+      margin-bottom: 18px;
+      font-weight: 600;
+      text-align: center;
+      border: 1.5px solid #81e8a2;
+      animation: fade-in 0.8s;
+    }
+    .alert-err {
+      background: #ffbcbc;
+      color: #b42020;
+      border-radius: 8px;
+      padding: 9px 13px;
+      margin-bottom: 18px;
+      font-weight: 600;
+      text-align: center;
+      border: 1.5px solid #ff5f5f;
+      animation: fade-in 0.8s;
+    }
+    @keyframes fade-in {
+      from {opacity:0; transform:scale(.98);}
+      to {opacity:1; transform:none;}
+    }
+    .tips-info {
+      background: #2c3c56b6;
+      color: #c3eaff;
+      border-radius: 7px;
+      padding: 9px 13px;
+      margin: 22px 0 10px 0;
+      font-size: .98em;
+      font-style: italic;
+      border-left: 5px solid #43d8c9;
+    }
+  </style>
+</head>
+<body class="bg-grad">
+  <div class="form-container">
+    <h2 class="form-title">⚙️ Pengaturan Admin</h2>
+    <% if (msg) { %>
+      <div class="alert-ok"><%= msg %></div>
+    <% } %>
+    <% if (err) { %>
+      <div class="alert-err"><%= err %></div>
+    <% } %>
+    <form action="/pengaturan" method="POST" autocomplete="off">
+      <div class="input-group">
+        <label>Nama Admin</label>
+        <input type="text" name="nama" value="<%= user.nama %>" required>
+      </div>
+      <div class="input-group">
+        <label>Password Baru <span style="color:#999;font-weight:400;font-size:.97em">(biarkan kosong jika tidak diubah)</span></label>
+        <input type="password" id="pwBaru" name="password" placeholder="Password Baru">
+        <span class="show-hide-pw" onclick="togglePassword()">👁️</span>
+      </div>
+      <button class="btn-primary" type="submit" style="margin-top:10px;">Simpan Perubahan</button>
+    </form>
+    <div class="tips-info">
+      Tips keamanan: Gunakan password unik, minimal 6 karakter, dan jangan gunakan tanggal lahir.<br>
+      Anda juga dapat mengubah nama tampilan admin di aplikasi ini.
+    </div>
+  </div>
+  <script>
+    function togglePassword() {
+      const pw = document.getElementById('pwBaru');
+      pw.type = pw.type === 'password' ? 'text' : 'password';
+    }
+  </script>
+</body>
+</html>

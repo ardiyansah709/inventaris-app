@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Barang</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;400&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background: linear-gradient(120deg,#1a2238 0%, #30475e 100%);
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Poppins', Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .form-card {
+        background: #23253eec;
+        max-width: 470px;
+        width: 100%;
+        border-radius: 25px;
+        box-shadow: 0 10px 32px #181d2c90;
+        padding: 44px 34px 35px 34px;
+        margin: 40px 0;
+        position: relative;
+        animation: fadeInUp 0.85s;
+      }
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(40px);}
+        to { opacity: 1; transform: translateY(0);}
+      }
+      .form-title {
+        font-size: 2rem;
+        color: #ff9f1c;
+        font-weight: 800;
+        margin-bottom: 20px;
+        text-align: center;
+        letter-spacing: 1.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+      }
+      .input-group {
+        margin-bottom: 19px;
+        display: flex;
+        flex-direction: column;
+      }
+      .input-group label {
+        color: #fff;
+        font-weight: 600;
+        margin-bottom: 7px;
+      }
+      .input-group input, .input-group select, .input-group textarea {
+        border-radius: 9px;
+        border: 2px solid #283655;
+        padding: 12px 13px;
+        font-size: 1.04rem;
+        background: #283655;
+        margin-bottom: 2px;
+        color: #fff;
+        transition: border 0.2s;
+        resize: none;
+      }
+      .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+        border-color: #ff9f1c;
+        outline: none;
+        background: #222843;
+      }
+      .btn-primary {
+        width: 100%;
+        padding: 13px 0;
+        background: linear-gradient(90deg, #ff9f1c 40%, #283655 100%);
+        color: #fff;
+        font-size: 1.13rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 13px;
+        box-shadow: 0 4px 16px #ff9f1c40;
+        cursor: pointer;
+        margin-top: 10px;
+        letter-spacing: 1px;
+        transition: background 0.21s, box-shadow 0.18s, transform 0.17s;
+      }
+      .btn-primary:hover {
+        background: linear-gradient(90deg, #283655 20%, #ff9f1c 100%);
+        box-shadow: 0 8px 26px #ff9f1c68;
+        transform: scale(1.04) translateY(-2px);
+      }
+      .btn-back {
+        position: absolute;
+        left: 16px; top: 18px;
+        background: #1a2238;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px #22284370;
+        padding: 6px;
+        display: inline-flex;
+        align-items: center;
+        border: none;
+        color: #ff9f1c;
+        text-decoration: none;
+      }
+      .btn-back:hover { background: #283655; }
+      .img-preview-edit {
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .img-preview-edit img {
+        max-width: 82px;
+        border-radius: 10px;
+        box-shadow: 0 3px 12px #222a3e30;
+        border: 2px solid #23243c33;
+      }
+      .img-current {
+        font-size: .99rem;
+        color: #8e8eab;
+        opacity: .75;
+        margin-left: 2px;
+      }
+      .input-group input[type="file"] {
+        padding: 0;
+        background: none;
+        color: #fff;
+        border: none;
+      }
+    </style>
+</head>
+<body>
+    <a href="/" class="btn-back" title="Kembali ke Dashboard">
+        <svg width="29" height="29" fill="none"><path d="M18 24l-9-10 9-10" stroke="#ff9f1c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <div class="form-card">
+        <div class="form-title">Edit Barang <span>🛠️</span></div>
+        <form action="/edit/<%= item._id %>" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <div class="input-group">
+                <label>Nama Barang</label>
+                <input type="text" name="name" value="<%= item.name %>" required autofocus>
+            </div>
+            <div class="input-group">
+                <label>Kategori</label>
+                <input type="text" name="category" value="<%= item.category %>" required>
+            </div>
+            <div class="input-group">
+                <label>Stok</label>
+                <input type="number" name="stock" value="<%= item.stock %>" min="1" required>
+            </div>
+            <div class="input-group">
+                <label>Harga (Rp)</label>
+                <input type="number" name="price" value="<%= item.price %>" min="1" required>
+            </div>
+            <div class="input-group">
+                <label>Deskripsi</label>
+                <textarea name="desc" rows="3" style="resize:vertical;"><%= item.desc %></textarea>
+            </div>
+            <div class="input-group">
+                <label>Foto Barang (biarkan kosong jika tidak diubah)</label>
+                <input type="file" name="photo" accept="image/*">
+                <% if (item.photo) { %>
+                <div class="img-preview-edit">
+                    <img src="/uploads/<%= item.photo %>" alt="Foto Lama">
+                    <span class="img-current">Foto saat ini</span>
+                </div>
+                <% } %>
+            </div>
+            <button class="btn-primary" type="submit">
+                <span>Update Barang</span>
+            </button>
+        </form>
+    </div>
+</body>
+</html>

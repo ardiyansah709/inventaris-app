@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Admin Inventaris</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a2238 0%, #30475e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1.2s;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(48px);}
+          to { opacity: 1; transform: none;}
+        }
+        .login-box {
+            background: #222843f2;
+            padding: 44px 37px 38px 37px;
+            border-radius: 24px;
+            box-shadow: 0 10px 38px #141d32c5;
+            max-width: 370px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            animation: loginPop 1.2s cubic-bezier(.18,1.25,.43,1.09);
+        }
+        @keyframes loginPop {
+          0% { transform: scale(0.94) translateY(50px); opacity:0.1; }
+          80% { transform: scale(1.03); }
+          100% { transform: scale(1); opacity:1;}
+        }
+        .login-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        .login-logo img {
+            width: 56px;
+            height: 56px;
+            border-radius: 15px;
+            box-shadow: 0 3px 16px #ff9f1c33;
+            margin-bottom: 0px;
+            background: #fffbe8;
+            padding: 5px;
+        }
+        .login-title {
+            text-align: center;
+            color: #ff9f1c;
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 26px;
+            letter-spacing: 2px;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+        .login-box label {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 7px;
+            display: block;
+            letter-spacing: .2px;
+        }
+        .login-box input {
+            width: 100%;
+            border-radius: 11px;
+            border: 2px solid #23243c;
+            padding: 13px 13px;
+            font-size: 1.07rem;
+            background: #283655;
+            margin-bottom: 21px;
+            color: #fff;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 10px #2c346a18;
+        }
+        .login-box input:focus {
+            border-color: #ff9f1c;
+            outline: none;
+            box-shadow: 0 0 0 2px #ff9f1c38;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 13px 0;
+            background: linear-gradient(90deg, #ff9f1c 40%, #283655 100%);
+            color: #fff;
+            font-size: 1.13rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 13px;
+            box-shadow: 0 4px 16px #ff9f1c40;
+            cursor: pointer;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            transition: background 0.21s, box-shadow 0.18s, transform 0.17s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+        }
+        .btn-login:hover {
+            background: linear-gradient(90deg, #283655 40%, #ff9f1c 100%);
+            box-shadow: 0 8px 26px #ff9f1c68;
+            transform: scale(1.04) translateY(-2px);
+        }
+        .login-box .msg-error {
+            background: #ff7b7bcc;
+            color: #fff;
+            border-radius: 8px;
+            padding: 9px 11px;
+            text-align: center;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            animation: shake 0.25s;
+        }
+        @keyframes shake {
+          0% {transform: translateX(-6px);}
+          40% {transform: translateX(8px);}
+          70% {transform: translateX(-7px);}
+          100% {transform: translateX(0);}
+        }
+        .login-footer {
+            margin-top: 15px;
+            text-align: center;
+            color: #8e8eab;
+            font-size: .98rem;
+            opacity: 0.93;
+        }
+        .login-footer b { color:#ff9f1c; }
+    </style>
+</head>
+<body>
+    <form class="login-box" action="/login" method="POST" autocomplete="off">
+        <div class="login-logo">
+            <!-- Ganti icon/logo sesuai keinginan -->
+            <img src="https://cdn-icons-png.flaticon.com/512/2983/2983898.png" alt="Logo Inventaris">
+        </div>
+        <div class="login-title">Login Admin</div>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="msg-error"><%= error %></div>
+        <% } %>
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Masukkan username" required autofocus>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Masukkan password" required>
+        <button class="btn-login" type="submit">
+            <span>Masuk</span>
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="login-footer">
+            <b>Inventaris App</b> &bull; Admin Panel
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Statistik Inventaris</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body.bg-grad {
+      background: linear-gradient(120deg,#23243e 0%, #283655 100%);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    .container {
+      background: rgba(34,40,67,0.97);
+      color: #f3f6ff;
+      max-width: 950px;
+      margin: 46px auto 0 auto;
+      border-radius: 26px;
+      box-shadow: 0 10px 38px #141d32a0, 0 1.5px 12px #282a38a3;
+      padding: 40px 38px 52px 38px;
+      animation: fadein 0.7s;
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(40px);}
+      to   { opacity: 1; transform: none;}
+    }
+    .judul-utama {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #ff9f1c;
+      letter-spacing: 2px;
+      margin-bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+    .stats-panel {
+      display: flex;
+      gap: 36px;
+      justify-content: center;
+      margin-bottom: 38px;
+      flex-wrap: wrap;
+    }
+    .stats-card {
+      background: #23243c;
+      border-radius: 18px;
+      padding: 28px 40px 21px 40px;
+      color: #ffdf9e;
+      min-width: 170px;
+      box-shadow: 0 6px 30px #22284329;
+      text-align: center;
+      border: 2px solid #ff9f1c55;
+      margin-bottom: 10px;
+      flex: 1;
+      max-width: 230px;
+      transition: transform 0.22s, box-shadow 0.19s;
+    }
+    .stats-card:hover {
+      transform: scale(1.045) translateY(-6px);
+      box-shadow: 0 16px 40px #ff9f1c18;
+      background: #222843;
+      color: #ffecc7;
+    }
+    .stats-card h3 {
+      color: #fff;
+      margin: 0 0 13px 0;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1.13em;
+      text-shadow: 0 2px 8px #141d3275;
+    }
+    .chart-section {
+      margin-top:40px; text-align:center;
+    }
+    #kategoriChart {
+      max-width:550px; min-width:210px; margin:0 auto; background:#fff;
+      border-radius:16px; box-shadow:0 4px 22px #ff9f1c20;
+      padding:22px 6px 18px 6px;
+    }
+    .note-chart {
+      margin-top:20px; color:#aaa; font-size:.98em; text-align:center;
+    }
+    @media (max-width:700px){
+      .container{padding:12px;}
+      .stats-panel{gap:10px;}
+      .stats-card{padding:14px 5px;}
+    }
+  </style>
+</head>
+<body class="bg-grad">
+  <div class="container">
+    <h1 class="judul-utama">📊 Statistik Inventaris</h1>
+    <div class="stats-panel">
+      <div class="stats-card">
+        <h3>Total Barang</h3>
+        <div style="font-size:2.3em;"><%= totalBarang %></div>
+      </div>
+      <div class="stats-card">
+        <h3>Total Stok</h3>
+        <div style="font-size:2.3em;"><%= totalStok %></div>
+      </div>
+      <div class="stats-card">
+        <h3>Total Nilai</h3>
+        <div style="font-size:2.3em;">
+          Rp<span id="nilaiInventaris"><%= totalNilai %></span>
+        </div>
+      </div>
+    </div>
+    <div class="chart-section">
+      <h3 style="color:#ff9f1c;font-size:1.18em;margin-bottom:17px;">Grafik Stok per Kategori</h3>
+      <canvas id="kategoriChart"></canvas>
+      <div class="note-chart">
+        <span>Visualisasi data stok per kategori barang secara real-time.</span>
+      </div>
+    </div>
+    <div style="margin-top:48px;font-size:.99em;color:#bbb;text-align:center;">
+      <hr style="border:.5px solid #ff9f1c35;margin-bottom:18px;">
+      <span>&copy; <%= new Date().getFullYear() %> Aplikasi Inventaris</span>
+    </div>
+  </div>
+  <script>
+    // Format ribuan untuk total nilai (client-side)
+    const nilai = document.getElementById('nilaiInventaris');
+    nilai.textContent = Number(nilai.textContent).toLocaleString('id-ID');
+
+    // Data untuk Chart.js dari server
+    const dataKategori = <%- JSON.stringify(Object.values(kategoriStat)) %>;
+    const labelKategori = <%- JSON.stringify(Object.keys(kategoriStat)) %>;
+
+    // Warna gradasi custom Chart.js
+    const ctx = document.getElementById('kategoriChart').getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 600, 0);
+    gradient.addColorStop(0, '#ff9f1c');
+    gradient.addColorStop(1, '#43d8c9');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labelKategori,
+        datasets: [{
+          label: 'Stok per Kategori',
+          data: dataKategori,
+          backgroundColor: gradient,
+          borderRadius: 9,
+        }]
+      },
+      options: {
+        animation: { duration: 1300, easing: 'easeOutQuart' },
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#222843', font: {weight:'bold'}} },
+          y: { grid: { color: '#eee' }, beginAtZero: true, ticks: { color: '#222843', stepSize: 1 } }
+        }
+      }
+    });
+  </script>
+</body> 
+</html>
